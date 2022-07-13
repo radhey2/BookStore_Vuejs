@@ -5,10 +5,10 @@
       </div>
      <v-container fluid class="card">
         <v-row >
-            <v-col cols="3"  v-for="BookInfos in BookInfo" :key="BookInfos.bookId">
+            <v-col cols="3"  v-for="BookInfos in BookInfo" :key="BookInfos.bookid">
            <v-card>
               <v-img
-                :src="BookInfos.bookImage"
+                :src='`../assets/${BookInfos.bookImg}`'
                 class="white--text align-end"
                 gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
                 height="150px"
@@ -19,6 +19,9 @@
                 <div class="my-4 text-subtitle-1">
                   by {{ BookInfos.authorName }}
                 </div>
+                <div class="my-4 text-subtitle-1">
+                  by {{ BookInfos.bookDescription }}
+                </div>
                 <v-card-title>Price:Rs {{ BookInfos.price }}</v-card-title>
               </v-card-text>
 
@@ -28,7 +31,7 @@
                   depressed
                   elevation="2"
                   small
-                  @click="AddtoCart(BookInfos.bookId, BookInfos.price)"
+                  @click="AddtoCart(BookInfos.bookid, BookInfos.price)"
                 >
                   <v-icon>mdi-cart</v-icon>Add To Cart
                 </v-btn>
@@ -45,23 +48,24 @@
 
 <script>
 import BookStoreService from '@/Service/BookStoreService';
+import CartService from '@/Service/CartService';
 export default {
      name: "home",
   data: () => {
     return {
       formValues: {
-        userId: "",
-        bookId: "",
-        quantity: "",
+        userid: "",
+        bookid: "",
+        Qty: "",
         total: "",
       },
       BookInfo: [],
       count: 0,
       cards: [
-        { src: "../assets/Image 7.png", flex: 6 },
-        { src: "../assets/Image 11.png", flex: 6 },
-        { src: "../assets/Image 10.png", flex: 6 },
-        { src: "../assets/Image 18.png", flex: 6 },
+        { src: "./assets/Image 7.png", flex: 6 },
+        { src: "./assets/Image 11.png", flex: 6 },
+        { src: "./assets/Image 10.png", flex: 6 },
+        { src: "./assets/Image 18.png", flex: 6 },
       ],
     };
   },
@@ -87,11 +91,11 @@ export default {
       });
     },
     AddtoCart(id, total) {
-      console.log(this.BookInfo.bookId);
+      console.log(this.BookInfo.bookid);
       console.log(id);
-      this.formValues.bookId = id;
-      this.formValues.userId = 23;
-      this.formValues.quantity = 1;
+      this.formValues.bookid = id;
+      this.formValues.userid = 4;
+      this.formValues.Qty = 1;
       this.formValues.total = total;
       console.log(this.formValues);
       const data = this.formValues;
@@ -102,7 +106,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          alert("WARNING!! Error while adding the Added person !");
+          alert("WARNING!! Error while adding the Adding Book !");
         });
     },
   },

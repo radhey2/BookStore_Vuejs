@@ -29,7 +29,7 @@
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
       <span class="mr-2">Cart</span>
-      <router-link to="/about"><v-icon>mdi-cart</v-icon></router-link>
+      <router-link to="/Cart"><v-icon>mdi-cart</v-icon></router-link>
     </v-app-bar>
 
     <v-main>
