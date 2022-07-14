@@ -183,7 +183,7 @@
                 Total:{{ BookInfo.total }}
               </v-list-item-title>
 
-              <router-link to="/placeOrder"> <v-btn
+              <router-link to="/Order"> <v-btn
                 color="#a03037"
                 text
                 type="Submit"
@@ -201,6 +201,7 @@
 <script>
 
 import CartService from '@/Service/CartService';
+import OrderService from '../Service/OrderService'
 export default {
   name: "Cart",
 
@@ -231,10 +232,8 @@ export default {
         console.log(response);
         this.BookInfo = response.data.data;
         console.log(this.BookInfo);
-        // this.BookInfo.length
         this.count = this.BookInfo.length;
         console.log(this.count);
-        // this.count.
         this.CartData = response.data.data;
         this.setTotalValue();
       });
@@ -248,7 +247,6 @@ export default {
       this.cartTotalPrice = price * this.counter;
       console.log(this.cartTotalPrice);
       console.log(this.counter);
-      //  location.reload();
       this.updateCartQuantity(id, this.counter, this.cartTotalPrice);
     },
     decrement(id, Qty, total) {
@@ -266,24 +264,19 @@ export default {
       CartService.updateQuantity(id, Qty, total).then((data) => {
         console.log(data);
         this.CartData = data.data.data;
-        // location.reload();
         console.log(this.CartData);
         this.getBookCart();
       });
     },
     setTotalValue() {
       console.log(this.CartData);
-      // let newVar = this.BookInfo.
       let newVar = this.CartData.map((books, index) => {
         console.log(books.total);
         return books.total;
       });
       this.CartData.total = newVar.reduce((a, b) => a + b);
       console.log(this.CartData.total);
-      // this.setState({
-      //     discountCoupon: this.state.totalPrice
-      // })
-      // console.log(this.state.totalPrice);
+      
     },
     addToOrder(price) {
       console.log(price);
@@ -296,17 +289,16 @@ export default {
           (response) => {
             console.log(response);
           },
-          () => this.$router.push({ name: "PlaceOrder" })
+          () => this.$router.push({ name: "Order" })
         )
         .catch((error) => {
           console.log(error);
-          alert("WARNING!! Error while adding the Added Order !");
         });
     },
   },
   created() {
     this.getBookCart();
-    // this.setTotalValue(this.BookInfo);
+    
   },
 };
 </script>
