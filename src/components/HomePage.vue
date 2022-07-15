@@ -7,20 +7,25 @@
         <v-row >
             <v-col cols="3"  v-for="BookInfos in BookInfo" :key="BookInfos.bookid">
            <v-card>
-              <v-img
+             <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                 <span
+                   v-bind="attrs"
+                   v-on="on"
+                    ><v-img
                 :src='`../assets/${BookInfos.bookImg}`'
                 class="white--text align-end"
                 gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
                 height="150px"
                 width="150px"
-              />
+                /></span>
+              </template>
+                <span>{{ BookInfos.bookDescription }}</span>
+                    </v-tooltip>
               <v-card-title v-text="BookInfos.bookName"></v-card-title>
               <v-card-text>
                 <div class="my-4 text-subtitle-1">
                   by {{ BookInfos.authorName }}
-                </div>
-                <div class="my-4 text-subtitle-1">
-                  by {{ BookInfos.bookDescription }}
                 </div>
                 <v-card-title>Price:Rs {{ BookInfos.price }}</v-card-title>
               </v-card-text>

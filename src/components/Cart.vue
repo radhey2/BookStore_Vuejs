@@ -1,10 +1,9 @@
 <template>
   <div>
-    <section >
+    <section v-if="count > 0"  justify="center">
       <v-expansion-panels v-model="panel" :disabled="disabled" multiple>
         <v-expansion-panel>
           <h2>Your Cart</h2>
-          <!-- <v-expansion-panel-content> -->
             <v-simple-table>
               <template v-slot:default>
                 <thead>
@@ -21,7 +20,7 @@
                     <td>{{ BookInfos.bookData.bookName }}</td>
                     <td>{{ BookInfos.bookData.price }}</td>
                     <td>
-                      <v-btn
+                      <v-btn :disabled="BookInfos.qty===1"
                         small
                         @click="
                           decrement(
@@ -60,7 +59,6 @@
                 </tbody>
               </template>
             </v-simple-table>
-          <!-- </v-expansion-panel-content> -->
         </v-expansion-panel>
 
         <v-expansion-panel>
@@ -195,6 +193,42 @@
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels>
+    </section>
+    <section v-else>
+       <v-card
+    class="mx-auto"
+    max-width="344"
+   
+  >
+  
+<v-row
+    align="center"
+     justify="center"
+  >
+   <v-col
+          cols="20"
+        >
+    <v-card-text>
+ 
+      <h2 color="#a03037" >Your Card</h2>
+     
+      <v-icon x-large   >mdi-cart-off</v-icon>
+     
+      <div class="text--primary">
+      Your cart is empty, fill it up!
+      </div>
+     
+    </v-card-text>
+   </v-col>
+     </v-row>
+    <v-card-actions>
+       <router-link to="/">
+        <v-btn color="#a03037"> BackToHome </v-btn></router-link
+      >
+      
+    </v-card-actions>
+  
+      </v-card>
     </section>
   </div>
 </template>
