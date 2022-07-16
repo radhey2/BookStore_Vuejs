@@ -136,7 +136,7 @@
                     </v-container>
                   </v-card-text>
 
-                  <v-btn color="primary" text @click="submit"> Continue </v-btn>
+                  <v-btn color="#a03037" text @click="submit"> Continue </v-btn>
                 </v-card>
               </v-col>
             </v-row>
@@ -171,24 +171,23 @@
                     Subtotal:{{ BookInfo.total }}
                   </v-card-actions>
 
-                  <v-list-item-subtitle
+                  <v-list-item-subtitle class="px-2"
                     >Shipping:FreeShipping</v-list-item-subtitle
                   >
                 </v-list-item-content>
               </v-list-item>
               <hr />
-              <v-list-item-title class="text-h5 mb-1">
+              <v-list-item-title class="text-h5 mb-1 px-6">
                 Total:{{ BookInfo.total }}
               </v-list-item-title>
-
-              <router-link to="/Order"> <v-btn
+                 <v-btn class="px-6"
                 color="#a03037"
                 text
                 type="Submit"
                 @click="addToOrder(BookInfo.total)"
               >
                 PLACEORDER
-              </v-btn></router-link>
+              </v-btn>
             </v-card>
           </v-expansion-panel-content>
         </v-expansion-panel>
@@ -260,6 +259,13 @@ export default {
         console.log(data);
         window.location.reload();
       });
+    },
+    deleteAllCart(CartData){
+       console.log(CartData);
+       CartService.deleteOrder(CartData).then((data) => { 
+          console.log(data);
+          window.location.reload();
+       })
     },
     getBookCart() {
       CartService.getAllCart().then((response) => {

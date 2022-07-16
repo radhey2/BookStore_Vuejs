@@ -30,6 +30,7 @@
       </v-btn>
       <span class="mr-2">Cart</span>
       <router-link to="/Cart"><v-icon>mdi-cart</v-icon></router-link>
+      <div class="cartbtn">{{ CartNo.length }}</div>
     </v-app-bar>
 
     <v-main>
@@ -39,11 +40,25 @@
 </template>
 
 <script>
+import CartService from './Service/CartService';
 export default {
   name: "App",
 
-  data: () => ({
-    //
-  }),
+  data () {
+    return {
+      CartNo: [],
+    };
+    },
+     methods: {
+    getCart() {
+      CartService.getAllCart().then((response) => {
+        console.log(response.data.data);
+        this.CartNo = response.data.data;
+      });
+    }
+  },
+  created() {
+    this.getCart();
+  },
 };
 </script>

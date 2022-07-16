@@ -1,6 +1,6 @@
 <template>
 <div>
-  <v-card class="mx-auto" max-width="450">
+  <v-card class="mx-auto" max-width="550">
     <v-img src="../../public/assets/success.png" height="200px"></v-img>
 
     <v-card-subtitle>

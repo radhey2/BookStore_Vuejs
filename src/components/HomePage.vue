@@ -7,7 +7,7 @@
         <v-row >
             <v-col cols="3"  v-for="BookInfos in BookInfo" :key="BookInfos.bookid">
            <v-card>
-             <v-tooltip bottom>
+             <v-tooltip top>
                 <template v-slot:activator="{ on, attrs }">
                  <span
                    v-bind="attrs"
@@ -31,7 +31,7 @@
               </v-card-text>
 
               <v-row align="center" justify="space-around">
-                <v-btn
+                <v-btn 
                   color="#a03037"
                   depressed
                   elevation="2"
@@ -71,6 +71,9 @@ export default {
         { src: "./assets/Image 11.png", flex: 6 },
         { src: "./assets/Image 10.png", flex: 6 },
         { src: "./assets/Image 18.png", flex: 6 },
+        { src: "./assets/Image 14.png", flex: 6 },
+        { src: "./assets/Life of Pie", flex: 6 },
+        
       ],
     };
   },
@@ -107,7 +110,6 @@ export default {
       CartService.addCart(data)
         .then((response) => {
           console.log(response);
-          // this.BookInfo = response.data.data;
         })
         .catch((error) => {
           console.log(error);
@@ -120,5 +122,6 @@ export default {
     this.getContactCount();
   },
 };
+
 </script>
  
