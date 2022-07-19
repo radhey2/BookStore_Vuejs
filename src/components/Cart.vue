@@ -73,35 +73,31 @@
                 <v-card ref="form">
                   <v-card-text>
                     <v-text-field
-                      ref="firstname"
-                      v-model="firstname"
-                      :rules="[() => !!firstname || 'This field is required']"
+                      v-model="values.fullname"
+                      :rules="[() => !!values.fullname || 'This field is required']"
                       :error-messages="errorMessages"
-                      label="FirstName"
+                      label="FullName"
                       required
                     ></v-text-field>
                     <v-text-field
-                      ref="lastname"
-                      v-model="lastname"
-                      :rules="[() => !!lastname || 'This field is required']"
+                      v-model="values.phone"
+                      :rules="[() => !!values.phone || 'This field is required']"
                       :error-messages="errorMessages"
-                      label="LastName"
+                      label="Phone"
                       required
                     ></v-text-field>
 
                     <v-text-field
-                      ref="Email"
-                      v-model="Email"
+                      v-model="values.email"
                       label="Email"
                     ></v-text-field>
 
                     <v-text-field
-                      ref="Address"
-                      v-model="Address"
+                      v-model="values.address"
                       :rules="[
-                        () => !!Address || 'This field is required',
+                        () => !!address || 'This field is required',
                         () =>
-                          !!Address & (Address.length <= 25) ||
+                          !!a & (Address.length <= 25) ||
                           'Address must be less than 25 characters',
                         addressCheck,
                       ]"
@@ -110,6 +106,7 @@
                       counter="25"
                       required
                     ></v-text-field>
+                    
                     <v-container fluid>
                       <v-radio-group v-model="radios">
                         <template v-slot:label>
@@ -136,7 +133,7 @@
                     </v-container>
                   </v-card-text>
 
-                  <v-btn color="#a03037" text @click="submit"> Continue </v-btn>
+                  <v-btn color="#a03037" text @click="newCustomer"> Continue </v-btn>
                 </v-card>
               </v-col>
             </v-row>
@@ -234,7 +231,8 @@
 <script>
 
 import CartService from '@/Service/CartService';
-import OrderService from '../Service/OrderService'
+import OrderService from '../Service/OrderService';
+import CustomerService from '../Service/CustomerService';
 export default {
   name: "Cart",
 
@@ -245,14 +243,39 @@ export default {
         address: "XYZ",
         price: "",
       },
+       
+      values:{
+        fullname: "",
+        phone: "",
+        email: "",
+        address: ""
+      }, 
 
       count: 0,
       BookInfo: [],
       CartData: [],
       cartTotalPrice: 0,
+      CustomerData: []
     };
   },
    methods: {
+     
+     newCustomer(){
+      console.log(this.CustomerData);
+      console.log(this.values);
+      const data = this.values;
+      CustomerService.addCustomer(data)
+        .then(
+          (response) => {
+            console.log(response);
+          }
+          // () => this.$router.push({ name: "Cart" })
+        )
+        .catch((error) => {
+          console.log(error);
+        });
+     },
+     
     remove(id) {
       console.log(id);
       CartService.deleteContact(id).then((data) => {

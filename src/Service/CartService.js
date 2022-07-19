@@ -21,5 +21,6 @@ class CartService {
   deleteOrder() {
     return axios.delete(`${BASE_URL}/deleteAll`)
 }
+
 }
 export default new CartService();
